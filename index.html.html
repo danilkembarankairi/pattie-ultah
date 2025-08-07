@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pettiejhembut - Happy Birthday</title>
+    <style>
+        /* ========= RESET & GLOBAL ========= */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #9a86d4 0%, #f0ebff 100%);
+            color: #312a57;
+            min-height: 100vh;
+        }
+
+        body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://img.pikbest.com/backgrounds/20220119/pink-and-fresh-birthday-cake_6237903.jpg!bwr800'); /* Gambar confetti transparan */
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.5;
+    z-index: -1;
+    pointer-events: none;
+}
+body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: url('https://img.pikbest.com/backgrounds/20220119/pink-and-fresh-birthday-cake_6237903.jpg!bwr800'); /* Gambar glitter transparan */
+    background-size: contain;
+    background-repeat: repeat;
+    opacity: 0.1;
+    z-index: -1;
+    pointer-events: none;
+}
+
+        .page {
+            display: none;
+            min-height: calc(100vh - 64px);
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        img {
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        /* ========= BIRTHDAY PAGE ========= */
+        .birthday-container {
+            display: center;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 64px);
+            padding: 130px;
+        }
+        .birthday-card {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            border-radius: 25px;
+            padding: 50px;
+            max-width: 1000px;
+            width: 100%;
+            box-shadow: 0 8px 40px rgba(122, 95, 208, 0.15);
+            border: 1px solid rgba(122, 95, 208, 0.1);
+             background-color: #4f2558;
+            background-image: radial-gradient(circle at 20px 20px, #e8e3d3 2px, transparent 2px), radial-gradient(circle at 40px 40px, #e8e3d3 2px, transparent 2px);
+            background-size: 60px 60px;
+        }
+
+        .photo-section {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+            .birthday-photo {
+                width: 220px;
+                height: 300px;
+                object-fit: cover;
+                border-radius: 20px;
+                border: 4px solid #c5c5c5;
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+                position: relative;
+                z-index: 2;
+            }
+
+        .gift-icon {
+            position: absolute;
+            right: -25px;
+            bottom: 10px;
+            width: 90px;
+            height: auto;
+            z-index: 3;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+        }
+
+        .confetti-decoration {
+            position: absolute;
+            left: 50px;
+            top: 24px;
+            font-size: px;
+            opacity: 0.8;
+            z-index: 4;
+            animation: sparkle 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes sparkle {
+            from { transform: rotate(0deg) scale(1); }
+            to { transform: rotate(5deg) scale(1.1); }
+        }
+
+        .content-section {
+            flex: 2px;
+        }
+
+        .greeting-text {
+    font-size: 17px;
+    color: #101010;
+    margin-bottom: 10px;
+    margin-top: -20px;
+    font-weight: 450;
+    background: linear-gradient(120deg, #101010 0%, #ffffff 50%, #101010 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmerText 2s linear infinite;
+}
+
+@keyframes shimmerText {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+        .birthday-title {
+    font-size: 48px;
+    font-weight: 800;
+    color: #e7e6ed;
+    margin: 0 0 35px 0;
+    letter-spacing: 5px;
+    line-height: 1.1;
+    text-shadow: 0 2px 4px rgba(122, 95, 208, 0.1);
+    display: inline-block;
+    animation: birthdayBounce 2s ease-in-out infinite, 
+               birthdayColor 6s linear infinite;
+}
+/* Animasi bounce */
+@keyframes birthdayBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+/* Animasi warna pastel berganti */
+@keyframes birthdayColor {
+    0%   { color: #ff9aa2; text-shadow: 0 0 10px #ff9aa2; }
+    20%  { color: #ffb347; text-shadow: 0 0 10px #ffb347; }
+    40%  { color: #ffda77; text-shadow: 0 0 10px #ffda77; }
+    60%  { color: #b5ead7; text-shadow: 0 0 10px #b5ead7; }
+    80%  { color: #c7ceea; text-shadow: 0 0 10px #c7ceea; }
+    100% { color: #ff9aa2; text-shadow: 0 0 10px #ff9aa2; }
+}
+    .enter-button {
+    font-size: 20px;
+    padding: 16px 36px;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #ff9aa2, #ffda77, #b5ead7, #c7ceea);
+    background-size: 300% 300%;
+    color: #1c1717;
+    font-weight: 700;
+    box-shadow: 0 6px 20px rgba(255, 182, 193, 0.5);
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+    animation: buttonGlow 6s ease infinite, buttonBounce 2s ease-in-out infinite;
+    transition: transform 0.2s ease;
+}
+
+.enter-button:hover {
+    transform: scale(1.08);
+}
+
+/* Efek glow warna berganti */
+@keyframes buttonGlow {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Efek bounce halus */
+@keyframes buttonBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+        /* ========= MENU PAGE ========= */
+        .menu-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 64px);
+            padding: 40px;
+        }
+
+        .menu-cards {
+            display: flex;
+            gap: 0;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 0 8px 40px rgba(122, 95, 208, 0.15);
+            border-radius: 24px;
+            overflow: hidden;
+        }
+
+.menu-card {
+  flex: 1;
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 22px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+}
+
+/* Efek kilau menyapu */
+.menu-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 40%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0.2) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-20deg);
+  animation: shineLoop 3s linear infinite;
+  pointer-events: none;
+}
+
+/* Efek hover tambahan */
+.menu-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+/* Animasi shine berjalan */
+@keyframes shineLoop {
+  0% {
+    left: -150%;
+  }
+  100% {
+    left: 150%;
+  }
+}
+        .menu-card img {
+            width: 175px;
+            height: 150px;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 2px 4px rgba(2, 2, 2, 0.2));
+        }
+
+        /* ========= BACK BUTTON ========= */
+        .back-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #2b2b2b; /* Warna gelap modern */
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  z-index: 10;
+}
+
+.back-button:hover {
+  background-color: #1f1f1f;
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+        /* ========= LETTER PAGE ========= */
+        .letter-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 64px);
+            padding: 20px;
+        }
+            /* Fade + Slide Super Lembut */
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+    filter: blur(6px);
+  }
+  60% {
+    opacity: 0.6;
+    transform: translateY(15px);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Zoom Super Lembut */
+@keyframes zoomInSoft {
+  0% {
+    opacity: 0;
+    transform: scale(0.88);
+    filter: blur(6px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(0.97);
+    filter: blur(3px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Letter Card Styling */
+.letter-card {
+  display: flex;
+  gap: 25px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 40px;
+  max-width: 950px;
+  width: 100%;
+  animation: fadeSlideUp 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Foto di Letter */
+.letter-photo-section {
+  flex-shrink: 0;
+  animation: zoomInSoft 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 0.15s;
+}
+        .letter-photo {
+            width: 300px;
+            height: 210px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 5px solid #ffffff;
+            box-shadow: 0 6px 25px rgba(255, 255, 255, 0.15);
+        }
+
+        .letter-content {
+            flex: 1;
+        }
+        .letter-text-box {
+            background: linear-gradient(135deg, #8b58ac 0%, #7b7683 100%);
+            border-radius: 20px;
+            padding: 30px 35px;
+            color: #131216;
+            font-size: 18px;
+            font-style: italic;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            line-height: 1.7;
+            border: 1px solid rgba(122, 95, 208, 0.1);
+            box-shadow: 0 4px 15px rgba(122, 95, 208, 0.05);
+        }
+
+        .letter-signature {
+            color: #25232b;
+            font-style: italic;
+            text-align: right;
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .letter-footer {
+            text-align: center;
+            color: #16151b;
+            font-size: 16px;
+            margin-top: 20px;
+            font-style: italic;
+            opacity: 0.8;
+        }
+/**galeri**/
+        .page {
+  display: none;
+  padding: 40px 20px;
+}
+
+.page.active {
+  display: block;
+}
+
+.gallery-title {
+  text-align: center;
+  font-size: 32px;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: rgb(0, 0, 0);
+  margin-bottom: 30px;
+  opacity: 0;
+  animation: titleFadeIn 1.5s ease-out forwards, textGlow 3s ease-in-out infinite;
+}
+
+@keyframes titleFadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes textGlow {
+  0%, 100% {
+    text-shadow: 0 0 2px #5e4fc9;
+  }
+  50% {
+    text-shadow: 0 0 8px #3a138d;
+  }
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.gallery-item {
+  animation: floatElegant 2s ease-in-out infinite;
+}
+
+@keyframes floatElegant {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-3px) rotate(0.3deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-3px) rotate(-0.3deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+
+  /* Jangan tambahkan animasi langsung di sini supaya gak ganggu ukuran */
+}
+
+@keyframes subtleFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes softFade {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+        /* ========= RESPONSIVE DESIGN ========= */
+        @media (max-width: 900px) {
+            .birthday-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px;
+                gap: 30px;
+            }
+
+            .letter-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 30px;
+                gap: 25px;
+            }
+
+            .gallery-grid {
+                margin: 0 20px;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .menu-cards {
+                flex-direction: column;
+                gap: 20px;
+                background: transparent;
+                box-shadow: none;
+            }
+
+            .menu-card {
+                border-radius: 20px !important;
+                height: 200px;
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .birthday-title {
+                font-size: 36px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                margin: 0 10px;
+            }
+
+            .gallery-nav-button {
+                font-size: 24px;
+                padding: 8px 12px;
+            }
+
+        }
+
+        @media (max-width: 400px) {
+            header {
+                font-size: 18px;
+                padding: 12px 0;
+            }
+
+            .birthday-card,
+            .letter-card {
+                padding: 20px;
+                margin: 10px;
+                border-radius: 16px;
+            }
+
+            .letter-text-box {
+                padding: 20px;
+                font-size: 16px;
+            }
+        }
+        /**baloon**/
+        .balloons {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.balloon {
+  position: absolute;
+  bottom: -100px;
+  width: 40px;
+  height: 60px;
+  border-radius: 50% 50% 50% 50%;
+  opacity: 0.7;
+  animation: float 10s infinite ease-in;
+}
+
+.red {
+  background-color: #ff6b6b;
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.blue {
+  background-color: #4dabf7;
+  left: 50%;
+  animation-delay: 3s;
+}
+
+.green {
+  background-color: #51cf66;
+  left: 75%;
+  animation-delay: 6s;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-120vh) rotate(360deg);
+  }
+}
+.frame-img {
+  position: fixed;
+  width: 100px;
+  opacity: 0.6;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Sisi KIRI & KANAN */
+.frame-left {
+  left: 0;
+}
+
+.frame-right {
+  right: 0;
+  transform: scaleX(-1);
+}
+
+/* Sisi ATAS & BAWAH */
+.frame-top {
+  top: 0;
+  transform: rotate(90deg);
+}
+
+.frame-bottom {
+  bottom: 0;
+  transform: rotate(-90deg);
+}
+
+    </style>
+</head>
+<body>
+    <!-- KIRI -->
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-left" style="top: 0;">
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-left" style="top: 120px;">
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-left" style="top: 240px;">
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-left" style="top: 360px;">
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-left" style="top: 480px;">
+
+<!-- KANAN -->
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-right" style="top: 0;">
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-right" style="top: 120px;">
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-right" style="top: 240px;">
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-right" style="top: 360px;">
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-right" style="top: 480px;">
+
+<!-- ATAS -->
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-top" style="left: 0;">
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-top" style="left: 120px;">
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-top" style="left: 240px;">
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-top" style="left: 360px;">
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-top" style="left: 480px;">
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-top" style="left: 600px;">
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-top" style="left: 720px;">
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-top" style="left: 840px;">
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-top" style="left: 960px;">
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-top" style="left: 1080px;">
+
+<!-- BAWAH -->
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-bottom" style="left: 0;">
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-bottom" style="left: 120px;">
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-bottom" style="left: 240px;">
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-bottom" style="left: 360px;">
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-bottom" style="left: 480px;">
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-bottom" style="left: 600px;">
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-bottom" style="left: 720px;">
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-bottom" style="left: 840px;">
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-bottom" style="left: 960px;">
+<img src="https://www.pngmart.com/files/19/Taehyung-PNG-Picture.png" class="frame-img frame-bottom" style="left: 1080px;">
+    <!-- Birthday Page -->
+    <div class="page active" id="page-birthday">
+        <div class="birthday-container">
+            <div class="birthday-card">
+                <div class="photo-section">
+                    <div class="photo-background"></div>
+                    <img src="https://i.ibb.co.com/8LG6fC9Z/Whats-App-Image-2025-08-05-at-08-45-08-4950ed3d.jpg" alt="Birthday Person" class="birthday-photo">
+                    <img src="https://img.icons8.com/color/96/gift.png" class="gift-icon" alt="Gift">
+                    <div class="confetti-decoration">✨⭐️🎀</div>
+                </div>
+                <div class="content-section">
+                    <div class="greeting-text">Hi Jhembut! 👋</div>
+                    <h1 class="birthday-title">HAPPY<br>BIRTHDAY!</h1>
+                    <button class="enter-button" onclick="navigateToPage('menu')">Masuk 🎈</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu Page -->
+    <div class="page" id="page-menu">
+        <div class="menu-container">
+            <div class="menu-cards">
+                <div class="menu-card letter" onclick="navigateToPage('letter')">
+                    <img src="https://www.pngplay.com/wp-content/uploads/7/Happy-Birthday-Balloons-Hanging-Letters-Transparent-PNG.png" alt="Letter Icon">
+                    <span>Letter</span>
+                </div>
+                <div class="menu-card gallery" onclick="navigateToPage('gallery')">
+                    <img src="https://i.ibb.co.com/dwXhB9GW/Whats-App-Image-2025-08-05-at-12-53-06-39af65bc-removebg-preview.png" alt="Gallery Icon">
+                    <span>PAKUAN PRIDE</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Letter Page -->
+<div class="page" id="page-letter">
+    <button class="back-button" onclick="navigateToPage('menu')">← Back</button>
+
+    <audio id="bg-music" src="audio/bgmusic.mp3" loop></audio>
+
+    <div class="letter-container">
+        <div class="letter-card">
+            <div class="letter-photo-section">
+                <img src="http://www.textures4photoshop.com/tex/thumbs/white-envelope-letter-PNG-thumb25.png" alt="Letter Photo" class="letter-photo">
+            </div>
+            <div class="letter-content">
+                    <div class="letter-text-box">
+                        Semoga di umur yang baru ini lu nggak makin males bangun pagi (tolong ya, bisa bertanggung jawab dengan alarm lu). 😴⏰
+                        <br><br>
+                        Makin ambis kuliahnya walau sekelompok sama beban tim hidup emang keras, tapi lu harus lebih keras 💪📚
+                        <br><br>
+                        Jangan lupa juga buat terus bertumbuh dalam iman, deket sama Tuhan, dan inget: doa tuh bukan cuma pas sedih, tapi juga pas seneng. 🙏✨
+                        <div class="letter-signature">~ Kejia & Danil </div>
+                        
+                    </div>
+                    <div class="letter-footer">PATTIE PACAR TEHKYUNKKKKKKK</div>
+                </div>
+            </div>
+        </div>
+    </div>
+  <!-- Gallery Page -->
+  <div class="page" id="page-gallery">
+  <a href="#" class="back-button" onclick="showMenu()">← Back</a>
+  <h1 class="gallery-title">PACAR TEHYUNG NI BOSSS</h1>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="https://i.ibb.co.com/dJLPGvQy/Whats-App-Image-2025-08-05-at-12-53-07-2610c255.jpg" alt="Kenangan 1">
+    </div>
+    <div class="gallery-item">
+      <img src="https://i.ibb.co.com/zVdZznjg/Whats-App-Image-2025-08-05-at-12-53-08-a25b2260.jpg" alt="Kenangan 2">
+    </div>
+    <div class="gallery-item">
+      <img src="https://i.ibb.co.com/RTynNc7x/Whats-App-Image-2025-08-05-at-12-53-06-eb40f763.jpg" alt="Kenangan 3">
+    </div>
+    <div class="gallery-item">
+      <img src="https://i.ibb.co.com/wZ9Nsh3P/Whats-App-Image-2025-08-05-at-12-53-07-b0407d2a.jpg" alt="Kenangan 4">
+        </div>
+        </div>
+         </div>
+        </div>
+        <div class="balloons">
+  <div class="balloon red"></div>
+  <div class="balloon blue"></div>
+  <div class="balloon green"></div>
+</div>
+        </body>
+        </html>
+        </div>
+        </div>
+   <script>
+    // ========== PAGE NAVIGATION ==========
+
+    function showGallery() {
+        document.getElementById('page-menu').classList.remove('active');
+        document.getElementById('page-gallery').classList.add('active');
+    }
+
+    function showMenu() {
+        document.getElementById('page-gallery').classList.remove('active');
+        document.getElementById('page-menu').classList.add('active');
+    }
+
+    function navigateToPage(pageName) {
+        // Sembunyikan semua halaman
+        document.querySelectorAll('.page').forEach(page => {
+            page.classList.remove('active');
+        });
+
+        // Tampilkan halaman yang dipilih
+        document.getElementById('page-' + pageName).classList.add('active');
+
+        // Khusus jika membuka galeri, jalankan init
+        if (pageName === 'gallery') {
+            initializeGallery();
+        }
+    }
+    // ========== INISIALISASI SAAT PAGE LOAD ==========
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Tampilkan halaman awal saat pertama kali dibuka
+        navigateToPage('birthday');
+    });
+    
+</script>
+</body>
+</html>
